@@ -1,0 +1,10 @@
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.exe.config
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.exe
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.pdb
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GemBox.Spreadsheet.dll
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GemBox.Spreadsheet.xml
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csprojAssemblyReference.cache
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csproj.CoreCompileInputs.cache
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csproj.CopyComplete
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.exe
+C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.pdb
