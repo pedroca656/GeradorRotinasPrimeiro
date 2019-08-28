@@ -8,3 +8,13 @@ C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug
 C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csproj.CopyComplete
 C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.exe
 C:\Users\12205010\Desktop\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.pdb
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.exe.config
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.exe
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.pdb
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GemBox.Spreadsheet.dll
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GemBox.Spreadsheet.xml
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csprojAssemblyReference.cache
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csproj.CoreCompileInputs.cache
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csproj.CopyComplete
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.exe
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.pdb

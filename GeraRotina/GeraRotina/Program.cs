@@ -12,6 +12,20 @@ namespace GeraRotina
     {
         static void Main(string[] args)
         {
+            if(args.Length < 2)
+            {
+                Console.WriteLine("Por favor, passe como parâmetros a quantidade de dias da rotina e o nome do arquivo final!");
+                return;
+            }
+
+            var dias = 0;
+
+            if (!int.TryParse(args[0], out dias))
+            {
+                Console.WriteLine("Por favor, informe números inteiros como dias!");
+                return;
+            }
+
             Console.WriteLine("Iniciando aplicação...");
             SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
 
@@ -25,7 +39,7 @@ namespace GeraRotina
 
             var row = 1;
 
-            for (int i = 0; i <= 10; i++)
+            for (int i = 0; i < dias; i++)
             {
                 worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 7, 15, 0).ToShortTimeString();
                 worksheet.Cells[row, 1].Value = "B";
@@ -91,9 +105,11 @@ namespace GeraRotina
                 worksheet.Cells[row, 1].Value = "Q";
                 worksheet.Cells[row, 2].Value = "Sim";
                 row++;
+
+                Console.WriteLine("Dia " + i + " simulado...");
             }
 
-            workBook.Save("rotina2.xlsx");
+            workBook.Save(args[1]+".xlsx");
 
             Console.WriteLine("Arquivo gerado!");
         }
