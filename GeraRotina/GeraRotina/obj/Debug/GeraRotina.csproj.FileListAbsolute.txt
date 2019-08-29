@@ -18,3 +18,9 @@ C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\Ge
 C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csproj.CopyComplete
 C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.exe
 C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.pdb
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\NPOI.dll
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\NPOI.OOXML.dll
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\pedro\source\repos\GeradorRotinas1\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\ICSharpCode.SharpZipLib.xml

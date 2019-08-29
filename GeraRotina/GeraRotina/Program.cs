@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using GemBox.Spreadsheet;
+using NPOI.XSSF.UserModel;
+using System.IO;
+//using GemBox.Spreadsheet;
 
 namespace GeraRotina
 {
@@ -27,89 +29,104 @@ namespace GeraRotina
             }
 
             Console.WriteLine("Iniciando aplicação...");
-            SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
+            //SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
 
-            var workBook = new ExcelFile();
-            ExcelWorksheet worksheet = workBook.Worksheets.Add("rotina1");
+            var workBook = new XSSFWorkbook();
+            var worksheet = workBook.CreateSheet("rotina1");
 
-            worksheet.Cells[0, 0].Value = "Hora";
-            worksheet.Cells[0, 1].Value = "Cômodo"; //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
-            worksheet.Cells[0, 2].Value = "Dia Útil?";
-            worksheet.Cells[0, 3].Value = "";
+
+            var r = worksheet.CreateRow(0);
+            r.CreateCell(0).SetCellValue("Hora");
+            r.CreateCell(1).SetCellValue("Cômodo"); //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
+            r.CreateCell(2).SetCellValue("Dia Útil?");
 
             var row = 1;
 
             for (int i = 0; i < dias; i++)
             {
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 7, 15, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "B";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 7, 15, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("B");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 8, 0, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "Q";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 8, 0, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("Q");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 8, 30, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "C";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 8, 30, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("C");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 9, 0, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "F";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 9, 0, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("F");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 12, 0, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "S";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 12, 0, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("S");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 13, 0, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "C";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 13, 0, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("C");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 13, 30, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "F";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 13, 30, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("F");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 17, 30, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "S";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 17, 30, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("S");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 19, 0, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "B";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 19, 0, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("B");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 19, 30, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "Q";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 19, 30, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("Q");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 20, 0, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "C";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 20, 0, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("C");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 22, 0, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "S";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 22, 0, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("S");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
-                worksheet.Cells[row, 0].Value = new DateTime(1, 1, 1, 23, 30, 0).ToShortTimeString();
-                worksheet.Cells[row, 1].Value = "Q";
-                worksheet.Cells[row, 2].Value = "Sim";
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 23, 30, 0).ToShortTimeString());
+                r.CreateCell(1).SetCellValue("Q");
+                r.CreateCell(2).SetCellValue("Sim");
                 row++;
 
                 Console.WriteLine("Dia " + i + " simulado...");
             }
 
-            workBook.Save(args[1]+".xlsx");
+            using (var fs = new FileStream(args[1] + ".xls", FileMode.Create, FileAccess.Write))
+            {
+                workBook.Write(fs);
+            }
 
             Console.WriteLine("Arquivo gerado!");
         }
