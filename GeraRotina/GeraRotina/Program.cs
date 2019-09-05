@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Drawing;
 using NPOI.XSSF.UserModel;
 using System.IO;
-//using GemBox.Spreadsheet;
 
 namespace GeraRotina
 {
@@ -29,95 +28,110 @@ namespace GeraRotina
             }
 
             Console.WriteLine("Iniciando aplicação...");
-            //SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
 
             var workBook = new XSSFWorkbook();
             var worksheet = workBook.CreateSheet("rotina1");
 
 
             var r = worksheet.CreateRow(0);
-            r.CreateCell(0).SetCellValue("Hora");
-            r.CreateCell(1).SetCellValue("Cômodo"); //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
-            r.CreateCell(2).SetCellValue("Dia Útil?");
+            r.CreateCell(1).SetCellValue("Dia Mês");
+            r.CreateCell(1).SetCellValue("Hora");
+            r.CreateCell(2).SetCellValue("Cômodo"); //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
+            r.CreateCell(3).SetCellValue("Dia Útil?");
 
             var row = 1;
 
-            for (int i = 0; i < dias; i++)
+            for (int i = 0; i <= dias; i++)
             {
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 7, 15, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("B");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 7, 15, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("B");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 8, 0, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("Q");
-                r.CreateCell(2).SetCellValue("Sim");
-                row++;
-
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 8, 30, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("C");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 8, 0, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("Q");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 9, 0, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("F");
-                r.CreateCell(2).SetCellValue("Sim");
-                row++;
-
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 12, 0, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("S");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 8, 30, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("C");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 13, 0, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("C");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 9, 0, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("F");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 13, 30, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("F");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 12, 0, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("S");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 17, 30, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("S");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 13, 0, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("C");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 19, 0, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("B");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 13, 30, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("F");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 19, 30, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("Q");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 17, 30, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("S");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 20, 0, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("C");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 19, 0, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("B");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 22, 0, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("S");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 19, 30, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("Q");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(new DateTime(1, 1, 1, 23, 30, 0).ToShortTimeString());
-                r.CreateCell(1).SetCellValue("Q");
-                r.CreateCell(2).SetCellValue("Sim");
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 20, 0, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("C");
+                r.CreateCell(3).SetCellValue("Sim");
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 22, 0, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("S");
+                r.CreateCell(3).SetCellValue("Sim");
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(new DateTime(2019, 1, 1).AddDays(i).Day.ToString());
+                r.CreateCell(1).SetCellValue(new DateTime(1, 1, 1, 23, 30, 0).ToShortTimeString());
+                r.CreateCell(2).SetCellValue("Q");
+                r.CreateCell(3).SetCellValue("Sim");
                 row++;
 
                 Console.WriteLine("Dia " + i + " simulado...");
