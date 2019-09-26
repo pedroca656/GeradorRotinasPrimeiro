@@ -14,9 +14,9 @@ namespace GeraRotina
         //teste
         static void Main(string[] args)
         {
-            if(args.Length < 2)
+            if(args.Length < 3)
             {
-                Console.WriteLine("Por favor, passe como parâmetros a quantidade de dias da rotina e o nome do arquivo final!");
+                Console.WriteLine("Por favor, passe como parâmetros a quantidade de dias da rotina e o nome do arquivo final, além do tipo de algoritmo!");
                 return;
             }
 
@@ -25,6 +25,20 @@ namespace GeraRotina
             if (!int.TryParse(args[0], out dias))
             {
                 Console.WriteLine("Por favor, informe números inteiros como dias!");
+                return;
+            }
+
+            var isDBSCAN = false;
+
+            if (!bool.TryParse(args[2], out isDBSCAN))
+            {
+                Console.WriteLine("Por favor, informe se o tipo será dbscan!");
+                return;
+            }
+
+            if (isDBSCAN)
+            {
+                executaParaDBSCAN(dias, args[1]);
                 return;
             }
 
@@ -144,6 +158,121 @@ namespace GeraRotina
             }
 
             Console.WriteLine("Arquivo gerado!");
+        }
+
+        public static void executaParaDBSCAN(int dias, string nomeArquivo)
+        {
+            Console.WriteLine("Iniciando aplicação...");
+
+            var workBook = new XSSFWorkbook();
+            var worksheet = workBook.CreateSheet("rotina");
+
+
+            var r = worksheet.CreateRow(0);
+            //hora será em números inteiros
+            r.CreateCell(0).SetCellValue("Hora");
+            //comodo trocado para B = 1, Q = 2, C = 3, F = 4, S = 5 para poder executar o algoritmo
+            r.CreateCell(1).SetCellValue("Cômodo"); //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
+            r.CreateCell(2).SetCellValue("Dia Útil?");
+
+            var row = 1;
+
+            for (int i = 0; i <= dias; i++)
+            {
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(07.15 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(1);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(08.00 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(2);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(08.50 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(3);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(09.00 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(4);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(12.00 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(5);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(13.00 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(3);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(13.50 + GetRandomDouble(-0.125, 0.125), 2));
+                r.CreateCell(1).SetCellValue(4);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(17.50 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(5);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(19.00 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(1);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(19.50 + GetRandomDouble(-0.125, 0.125), 2));
+                r.CreateCell(1).SetCellValue(2);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(20.00 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(3);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(22.00 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(5);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                r = worksheet.CreateRow(row);
+                r.CreateCell(0).SetCellValue(System.Math.Round(23.50 + GetRandomDouble(-0.25, 0.25), 2));
+                r.CreateCell(1).SetCellValue(2);
+                r.CreateCell(2).SetCellValue(1);
+                row++;
+
+                Console.WriteLine("Dia " + i + " simulado...");
+            }
+
+            using (var fs = new FileStream(nomeArquivo + ".xls", FileMode.Create, FileAccess.Write))
+            {
+                workBook.Write(fs);
+            }
+
+            Console.WriteLine("Arquivo gerado!");
+        }
+
+        public static double GetRandomDouble(double minimum, double maximum)
+        {
+            Random random = new Random();
+            //multiplica pelo maximo - minimo e soma o maximo para ter entre a range informada
+            return random.NextDouble() * (maximum - minimum) + minimum;
         }
     }
 }
