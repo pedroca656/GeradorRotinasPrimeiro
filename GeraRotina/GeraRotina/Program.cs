@@ -171,90 +171,92 @@ namespace GeraRotina
             var r = worksheet.CreateRow(0);
             //hora será em números inteiros
             r.CreateCell(0).SetCellValue("Hora");
-            //comodo trocado para B = 1, Q = 2, C = 3, F = 4, S = 5 para poder executar o algoritmo
+            //comodo trocado para B = 100, Q = 200, C = 300, F = 400, S = 500 para poder executar o algoritmo
             r.CreateCell(1).SetCellValue("Cômodo"); //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
-            r.CreateCell(2).SetCellValue("Dia Útil?");
+            r.CreateCell(2).SetCellValue("Dia Mês");
 
             var row = 1;
 
             for (int i = 0; i <= dias; i++)
             {
+                var dia = new DateTime(2019, 1, 1).AddDays(i).Day;
+
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(07.15 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(1);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(100);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(08.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(2);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(200);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(08.50 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(3);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(300);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(09.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(4);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(400);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(12.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(5);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(500);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(13.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(3);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(300);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(13.50 + GetRandomDouble(-0.125, 0.125), 2));
-                r.CreateCell(1).SetCellValue(4);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(400);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(17.50 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(5);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(500);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(19.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(1);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(100);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(19.50 + GetRandomDouble(-0.125, 0.125), 2));
-                r.CreateCell(1).SetCellValue(2);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(200);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(20.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(3);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(300);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(22.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(5);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(500);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 r = worksheet.CreateRow(row);
                 r.CreateCell(0).SetCellValue(System.Math.Round(23.50 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(2);
-                r.CreateCell(2).SetCellValue(1);
+                r.CreateCell(1).SetCellValue(200);
+                r.CreateCell(2).SetCellValue(dia);
                 row++;
 
                 Console.WriteLine("Dia " + i + " simulado...");
