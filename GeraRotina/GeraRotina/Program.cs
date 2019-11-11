@@ -22,6 +22,8 @@ namespace GeraRotina
             {"F", "400"},
             {"S", "500"},
         };
+        
+        private static Random random = new Random();
 
 
         static void Main(string[] args)
@@ -102,47 +104,64 @@ namespace GeraRotina
                     break;
             }
 
+            var time = new TimeSpan(0, 0, 0);
+            var rndMin = -15;
+            var rndMax = 15;
+
             var row = 1;
             var dataBase = new DateTime(2019, 1, 1);
             for (var i = 0; i <= dias; i++)
             {
-                var rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(7, 15, 0), "B", true);
+                time = getTimeSpan(time, new TimeSpan(7, 15, 0), rndMin, rndMax);
+                var rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(8, 0, 0), "Q", true);
+                time = getTimeSpan(time, new TimeSpan(8, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "Q", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(8, 30, 0), "C", true);
+                time = getTimeSpan(time, new TimeSpan(8, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "C", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(9, 0, 0), "F", true);
+                time = getTimeSpan(time, new TimeSpan(9, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "F", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(12, 0, 0), "S", true);
+                time = getTimeSpan(time, new TimeSpan(12, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "S", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(13, 0, 0), "C", true);
+                time = getTimeSpan(time, new TimeSpan(13, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "C", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(13, 30, 0), "F", true);
+                time = getTimeSpan(time, new TimeSpan(13, 10, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "F", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(17, 30, 0), "S", true);
+                time = getTimeSpan(time, new TimeSpan(17, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "S", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(19, 0, 0), "B", true);
+                time = getTimeSpan(time, new TimeSpan(19, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(19, 30, 0), "Q", true);
+                time = getTimeSpan(time, new TimeSpan(19, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "Q", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(20, 0, 0), "C", true);
+                time = getTimeSpan(time, new TimeSpan(20, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "C", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(22, 0, 0), "S", true);
+                time = getTimeSpan(time, new TimeSpan(22, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "S", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
-                rotina = new Rotina(dataBase.AddDays(i), new TimeSpan(23, 30, 0), "Q", true);
+                time = getTimeSpan(time, new TimeSpan(23, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "Q", true);
                 WriteLine(worksheet, row++, rotina, algoritmo);
 
                 Console.WriteLine("Dia " + i + " simulado...");
@@ -490,6 +509,8 @@ namespace GeraRotina
             return result;
         }
 
+
+
         private static int getDiaSemana(DayOfWeek dia)
         {
             switch (dia)
@@ -520,6 +541,17 @@ namespace GeraRotina
             }
         }
 
+        private static TimeSpan getTimeSpan(TimeSpan lasTime, TimeSpan baseTime, int rndMin, int rndMax)
+        {
+            var diff = (int)(lasTime - baseTime).TotalMinutes;
+            if (diff > 0)
+            {
+                diff = (int)(lasTime.Add(TimeSpan.FromDays(-1)) - baseTime).TotalMinutes;
+            }
+            var rndMinutes = random.Next(Math.Max(rndMin, diff), rndMax);
+            var result = baseTime.Add(TimeSpan.FromMinutes(rndMinutes));
+            return result;
+        }
 
         private static void WriteLine(ISheet worksheet, int row, Rotina rotina, int algoritmo)
         {
