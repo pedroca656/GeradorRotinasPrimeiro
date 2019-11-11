@@ -56,3 +56,18 @@ C:\GitProjects\GeradorRotinas\GeraRotina\GeraRotina\bin\Debug\NPOI.OpenXmlFormat
 C:\GitProjects\GeradorRotinas\GeraRotina\GeraRotina\bin\Debug\GemBox.Spreadsheet.xml
 C:\GitProjects\GeradorRotinas\GeraRotina\GeraRotina\bin\Debug\ICSharpCode.SharpZipLib.xml
 C:\GitProjects\GeradorRotinas\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csproj.CopyComplete
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.exe.config
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.exe
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.pdb
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GemBox.Spreadsheet.dll
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\NPOI.dll
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\NPOI.OOXML.dll
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GemBox.Spreadsheet.xml
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\ICSharpCode.SharpZipLib.xml
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csprojAssemblyReference.cache
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csproj.CopyComplete
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.exe
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.pdb
