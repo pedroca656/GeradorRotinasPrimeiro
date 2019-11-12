@@ -105,9 +105,13 @@ namespace GeraRotina
 
                 default:
                     r.CreateCell(0).SetCellValue("Dia Mês");
+                    s.Add("Dia Mês");
                     r.CreateCell(1).SetCellValue("Hora");
+                    s.Add("Hora");
                     r.CreateCell(2).SetCellValue("Cômodo"); //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
+                    s.Add("Cômodo");
                     r.CreateCell(3).SetCellValue("Dia Útil?");
+                    s.Add("Dia Útil?");
 
                     break;
             }
