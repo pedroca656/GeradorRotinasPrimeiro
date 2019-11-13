@@ -298,30 +298,35 @@ namespace GeraRotina
             }
 
             // Gerar anomalias
-            var countAnomalias = (int)(rotinas.Count * (percAnomalias / 100));
+            //var countAnomalias = (int)(rotinas.Count * (percAnomalias / 100));
+            var countAnomalias = (int)(dias * (percAnomalias / 100));
             int iAnomalias = 0;
             while (iAnomalias < countAnomalias)
             {
                 var iDia = random.Next(0, dias);
                 var dtAnomalia = dataBase.AddDays(iDia);
                 var diaSemana = getDiaSemana(dtAnomalia.DayOfWeek);
-                var x = rotinas.Where(r => r.DiaMes == dtAnomalia).OrderBy(r=> r.Hora).ToList();
+                //var x = rotinas.Where(r => r.DiaMes == dtAnomalia).OrderBy(r=> r.Hora).ToList();
                 var iAnomaliasDia = 0;
-                for (int ix = 1; ix < x.Count(); ix++)
+                //for (int ix = 1; ix < x.Count(); ix++)
                 {
                     if (random.NextDouble() > 0.9)
                     {
-                        var hrAnomalia = x[ix - 1].Hora + TimeSpan.FromSeconds((x[ix].Hora - x[ix - 1].Hora).TotalSeconds / 2);
-                        var hr = getTimeSpan(x[ix - 1].Hora, hrAnomalia, rndMin, rndMax, x[ix].Hora);
+                        //var hrAnomalia = x[ix - 1].Hora + TimeSpan.FromSeconds((x[ix].Hora - x[ix - 1].Hora).TotalSeconds / 2);
+                        //var hr = getTimeSpan(x[ix - 1].Hora, hrAnomalia, rndMin, rndMax, x[ix].Hora);
 
-                        var comodosPossiveis = mapComodo.Keys.Except(new[] { x[ix - 1].Comodo, x[ix].Comodo }).ToList();
-                        var c = comodosPossiveis[random.Next(0, comodosPossiveis.Count - 1)];
+                        //var comodosPossiveis = mapComodo.Keys.Except(new[] { x[ix - 1].Comodo, x[ix].Comodo }).ToList();
+                        //var c = comodosPossiveis[random.Next(0, comodosPossiveis.Count - 1)];
+                        //rotinas.Add(new Rotina(dtAnomalia, hr, "B", diaSemana != 1 && diaSemana != 7));
+
+                        // ir ao banheiro de madrugada
+                        var hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(4,30,0), rndMin, rndMax);
                         rotinas.Add(new Rotina(dtAnomalia, hr, "B", diaSemana != 1 && diaSemana != 7));
 
                         iAnomalias++;
-                        iAnomaliasDia++;
+                        //iAnomaliasDia++;
 
-                        if (iAnomaliasDia > 2) break;
+                        //if (iAnomaliasDia > 2) break;
                     }
                 }
 
