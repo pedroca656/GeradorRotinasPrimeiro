@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Globalization;
-using NPOI.XSSF.UserModel;
 using System.IO;
-using NPOI.SS.Formula.Functions;
-using NPOI.SS.UserModel;
 
 namespace GeraRotina
 {
@@ -71,32 +67,19 @@ namespace GeraRotina
             var countAnomalias = 3;
 
 
-            //if (isDBSCAN)
-            //{
-            //    executaParaDBSCAN(dias, args[1]);
-            //    return;
-            //}
-
-
             Console.WriteLine("Iniciando aplicação...");
-
-            var workBook = new XSSFWorkbook();
-            var worksheet = workBook.CreateSheet("rotina1");
 
             var sb = new List<string>();
 
             // Cabeçalho
-            var r = worksheet.CreateRow(0);
             var s = new List<string>();
             switch (algoritmo)
             {
                 case 1: // DBSCAN
                 case 2: // LOF
                     //hora será em números inteiros
-                    r.CreateCell(0).SetCellValue("Hora");
                     s.Add("Hora");
                     //comodo trocado para B = 100, Q = 200, C = 300, F = 400, S = 500 para poder executar o algoritmo
-                    r.CreateCell(1).SetCellValue("DiaSemana-Comodo"); //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
                     s.Add("DiaSemana-Comodo");
                     //r.CreateCell(2).SetCellValue("Dia Mês");
                     break;
@@ -104,105 +87,20 @@ namespace GeraRotina
                 //case 3: // OPTICS
 
                 default:
-                    r.CreateCell(0).SetCellValue("Dia Mês");
                     s.Add("Dia Mês");
-                    r.CreateCell(1).SetCellValue("Hora");
                     s.Add("Hora");
-                    r.CreateCell(2).SetCellValue("Cômodo"); //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
                     s.Add("Cômodo");
-                    r.CreateCell(3).SetCellValue("Dia Útil?");
                     s.Add("Dia Útil?");
 
                     break;
             }
             sb.Add(string.Join(separator, s));
 
-            var time = new TimeSpan(0, 0, 0);
             var rndMin = -15;
             var rndMax = 15;
 
-            var row = 1;
-            var dataBase = new DateTime(2019, 1, 1);
-            Rotina rotina;
-            for (var i = 0; i <= dias; i++)
-            {
-                if (countAnomalias > 0 && random.NextDouble() > 0.7)
-                {
-                    time = getTimeSpan(time, new TimeSpan(5, 30, 0), rndMin * 2, rndMax * 2);
-                    rotina = new Rotina(dataBase.AddDays(i), time, "F", true);
-                    WriteLine(worksheet, sb, row++, rotina, algoritmo);
-                    countAnomalias--;
-                }
-
-                time = getTimeSpan(time, new TimeSpan(7, 15, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(8, 0, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "Q", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(8, 30, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "C", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(9, 0, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "F", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(12, 0, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "S", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(13, 0, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "C", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(13, 10, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "F", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(17, 30, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "S", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(19, 0, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(19, 30, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "Q", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(20, 0, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "C", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                if (countAnomalias > 1 && random.NextDouble() > 0.7)
-                {
-                    time = getTimeSpan(time, new TimeSpan(21, 15, 0), rndMin, rndMax);
-                    rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
-                    WriteLine(worksheet, sb, row++, rotina, algoritmo);
-                    countAnomalias--;
-
-                    time = getTimeSpan(time, new TimeSpan(21, 25, 0), rndMin, rndMax);
-                    rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
-                    WriteLine(worksheet, sb, row++, rotina, algoritmo);
-                    countAnomalias--;
-                }
-
-
-                time = getTimeSpan(time, new TimeSpan(22, 0, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "S", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-                time = getTimeSpan(time, new TimeSpan(23, 30, 0), rndMin, rndMax);
-                rotina = new Rotina(dataBase.AddDays(i), time, "Q", true);
-                WriteLine(worksheet, sb, row++, rotina, algoritmo);
-
-
-                Console.WriteLine("Dia " + i + " simulado...");
-            }
+            //Rotina1(dias, countAnomalias, rndMin, rndMax, sb, algoritmo);
+            Rotina2(dias, countAnomalias, rndMin, rndMax, sb, algoritmo);
 
             var dir = Path.Combine(AppContext.BaseDirectory, "output");
             Directory.CreateDirectory(dir);
@@ -223,12 +121,6 @@ namespace GeraRotina
                     break;
             }
 
-            //var fileName = Path.Combine(dir, args[1] + algoritmoNome + ".xlsx");
-            //using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-            //{
-            //    workBook.Write(fs);
-            //}
-
             var fileName = Path.Combine(dir, args[1] + algoritmoNome + ".csv");
             using (var fs = new StreamWriter(fileName))
             {
@@ -243,304 +135,410 @@ namespace GeraRotina
 #endif
         }
 
-        private static void executaParaDBSCAN(int dias, string nomeArquivo)
+        private static int Rotina2(int dias, int nAnomalias, int rndMin, int rndMax, List<string> sb, int algoritmo)
         {
-            Console.WriteLine("Iniciando aplicação...");
-
-            var workBook = new XSSFWorkbook();
-            var worksheet = workBook.CreateSheet("rotina");
-
-
-            var r = worksheet.CreateRow(0);
-            //hora será em números inteiros
-            r.CreateCell(0).SetCellValue("Hora");
-            //comodo trocado para B = 100, Q = 200, C = 300, F = 400, S = 500 para poder executar o algoritmo
-            r.CreateCell(1).SetCellValue("DiaSemana-Comodo"); //C = Cozinha, Q = Quarto, S = Sala, B = Banheiro, F = Fora de Casa
-            //r.CreateCell(2).SetCellValue("Dia Mês");
-
-            var row = 1;
+            Rotina rotina;
+            int cAnomalias = 0;
+            var dataBase = new DateTime(2019, 1, 1);
+            var time = new TimeSpan(0, 0, 0);
 
             for (int i = 0; i <= dias; i++)
             {
-                var diaSemana = getDiaSemana(new DateTime(2019, 1, 1).AddDays(i).DayOfWeek);
+                var diaSemana = getDiaSemana(dataBase.DayOfWeek);
 
                 if (diaSemana == 4) //rotina somente de quarta, simulando um dia em que o indivíduo chega mais tarde em casa
                 {
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(07.15 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(100 + (diaSemana * 1000));
+                    time = getTimeSpan(time, new TimeSpan(7, 10, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(08, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "Q", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(08.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(200 + (diaSemana * 1000));
+                    time = getTimeSpan(time, new TimeSpan(08, 30, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(09, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "F", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(08.50 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
+                    time = getTimeSpan(time, new TimeSpan(12, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(13, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(09.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(400 + (diaSemana * 1000));
+                    //time = getTimeSpan(time, new TimeSpan(13.50 + GetRandomDouble(-0.125, 0.125), 2));
+                    time = getTimeSpan(time, new TimeSpan(13, 30, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "F", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(12.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(13.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
+                    time = getTimeSpan(time, new TimeSpan(22, 30, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(13.50 + GetRandomDouble(-0.125, 0.125), 2));
-                    r.CreateCell(1).SetCellValue(400 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(22.50 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
+                    time = getTimeSpan(time, new TimeSpan(23, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "B", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(23.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(100 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(23.50 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(200 + (diaSemana * 1000));
+                    time = getTimeSpan(time, new TimeSpan(23, 30, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "Q", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    row++;
+
 
                     Console.WriteLine("Dia " + i + " simulado...");
                     continue;
                 }
                 else if (diaSemana == 1) //rotina somente de domingo, simulando um almoço em família
                 {
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(09.15 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(100 + (diaSemana * 1000));
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(09, 15, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "B", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(09.75 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(200 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(10.25 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(09, 50, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "Q", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(12.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(14.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(10, 15, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(16.00 + GetRandomDouble(-0.125, 0.125), 2));
-                    r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(19.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(200 + (diaSemana * 1000));
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(12, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(19.50 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(100 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(20.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(14, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(23.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(200 + (diaSemana * 1000));
 
-                    row++;
+
+
+                    //time = getTimeSpan(time, new TimeSpan(16.00 + GetRandomDouble(-0.125, 0.125), 2));
+                    time = getTimeSpan(time, new TimeSpan(16, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                    time = getTimeSpan(time, new TimeSpan(19, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "Q", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                    time = getTimeSpan(time, new TimeSpan(19, 30, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "B", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                    time = getTimeSpan(time, new TimeSpan(20, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                    time = getTimeSpan(time, new TimeSpan(23, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "Q", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
 
                     Console.WriteLine("Dia " + i + " simulado...");
                     continue;
                 }
                 else if (diaSemana == 7) //rotina somente de sábado, simulando um dia mais "preguiçoso"
                 {
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(10.50 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(100 + (diaSemana * 1000));
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(10, 30, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "B", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(11.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(12.50 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(11, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(13.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(14.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                    row++;
+                    //time = getTimeSpan(time, new TimeSpan(12.50, 0), rndMin, rndMax);
+                    time = getTimeSpan(time, new TimeSpan(12, 30, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(18.00 + GetRandomDouble(-0.125, 0.125), 2));
-                    r.CreateCell(1).SetCellValue(100 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(19.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(13, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(20.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                    row++;
 
-                    r = worksheet.CreateRow(row);
-                    r.CreateCell(0).SetCellValue(System.Math.Round(01.00 + GetRandomDouble(-0.25, 0.25), 2));
-                    r.CreateCell(1).SetCellValue(200 + (diaSemana * 1000));
 
-                    row++;
+                    time = getTimeSpan(time, new TimeSpan(14, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                    //time = getTimeSpan(time, new TimeSpan(18.00 + GetRandomDouble(-0.125, 0.125), 2));
+                    time = getTimeSpan(time, new TimeSpan(18, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "B", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                    time = getTimeSpan(time, new TimeSpan(19, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                    time = getTimeSpan(time, new TimeSpan(20, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                    time = getTimeSpan(time, new TimeSpan(01, 0, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "Q", diaSemana != 1 && diaSemana != 7);
+                    WriteLine(sb, rotina, algoritmo);
+
+
 
                     Console.WriteLine("Dia " + i + " simulado...");
                     continue;
                 }
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(07.15 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(100 + (diaSemana * 1000));
 
-                row++;
+                time = getTimeSpan(time, new TimeSpan(07, 15, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "B", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(08.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(200 + (diaSemana * 1000));
 
-                row++;
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(08.50 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
 
-                row++;
+                time = getTimeSpan(time, new TimeSpan(08, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "Q", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(09.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(400 + (diaSemana * 1000));
 
-                row++;
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(12.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                row++;
+                time = getTimeSpan(time, new TimeSpan(08, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(13.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
 
-                row++;
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(13.50 + GetRandomDouble(-0.125, 0.125), 2));
-                r.CreateCell(1).SetCellValue(400 + (diaSemana * 1000));
 
-                row++;
+                time = getTimeSpan(time, new TimeSpan(09, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "F", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(17.50 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                row++;
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(19.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(100 + (diaSemana * 1000));
 
-                row++;
+                time = getTimeSpan(time, new TimeSpan(12, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(19.50 + GetRandomDouble(-0.125, 0.125), 2));
-                r.CreateCell(1).SetCellValue(200 + (diaSemana * 1000));
 
-                row++;
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(20.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(300 + (diaSemana * 1000));
 
-                row++;
+                time = getTimeSpan(time, new TimeSpan(13, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(22.00 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(500 + (diaSemana * 1000));
 
-                row++;
 
-                r = worksheet.CreateRow(row);
-                r.CreateCell(0).SetCellValue(System.Math.Round(23.50 + GetRandomDouble(-0.25, 0.25), 2));
-                r.CreateCell(1).SetCellValue(200 + (diaSemana * 1000));
 
-                row++;
+                //time = getTimeSpan(time, new TimeSpan(13.50 + GetRandomDouble(-0.125, 0.125), 2));
+                time = getTimeSpan(time, new TimeSpan(13, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "F", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                time = getTimeSpan(time, new TimeSpan(17, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                time = getTimeSpan(time, new TimeSpan(19, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "B", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                //time = getTimeSpan(time, new TimeSpan(19.50 + GetRandomDouble(-0.125, 0.125), 2));
+                time = getTimeSpan(time, new TimeSpan(19, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "Q", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                time = getTimeSpan(time, new TimeSpan(20, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "C", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                time = getTimeSpan(time, new TimeSpan(22, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "S", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
+
+
+
+
+                time = getTimeSpan(time, new TimeSpan(23, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "Q", diaSemana != 1 && diaSemana != 7);
+                WriteLine(sb, rotina, algoritmo);
+
+
 
                 Console.WriteLine("Dia " + i + " simulado...");
             }
 
-            using (var fs = new FileStream(nomeArquivo + ".xls", FileMode.Create, FileAccess.Write))
+            return cAnomalias; //TODO: adicionar amomalias
+
+        }
+
+
+        private static int Rotina1(int dias, int nAnomalias, int rndMin, int rndMax, List<string> sb, int algoritmo)
+        {
+            Rotina rotina;
+            int cAnomalias = 0;
+            var dataBase = new DateTime(2019, 1, 1);
+            var time = new TimeSpan(0, 0, 0);
+
+            for (var i = 0; i <= dias; i++)
             {
-                workBook.Write(fs);
+                if (cAnomalias < nAnomalias && random.NextDouble() > 0.7)
+                {
+                    time = getTimeSpan(time, new TimeSpan(5, 30, 0), rndMin * 2, rndMax * 2);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "F", true);
+                    WriteLine(sb, rotina, algoritmo);
+                    cAnomalias++;
+                }
+
+                time = getTimeSpan(time, new TimeSpan(7, 15, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(8, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "Q", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(8, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "C", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(9, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "F", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(12, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "S", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(13, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "C", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(13, 10, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "F", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(17, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "S", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(19, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(19, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "Q", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(20, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "C", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                if (cAnomalias < nAnomalias && random.NextDouble() > 0.7)
+                {
+                    time = getTimeSpan(time, new TimeSpan(21, 15, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
+                    WriteLine(sb, rotina, algoritmo);
+                    cAnomalias++;
+
+                    time = getTimeSpan(time, new TimeSpan(21, 25, 0), rndMin, rndMax);
+                    rotina = new Rotina(dataBase.AddDays(i), time, "B", true);
+                    WriteLine(sb, rotina, algoritmo);
+                    cAnomalias++;
+                }
+
+
+                time = getTimeSpan(time, new TimeSpan(22, 0, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "S", true);
+                WriteLine(sb, rotina, algoritmo);
+
+                time = getTimeSpan(time, new TimeSpan(23, 30, 0), rndMin, rndMax);
+                rotina = new Rotina(dataBase.AddDays(i), time, "Q", true);
+                WriteLine(sb, rotina, algoritmo);
+
+
+                Console.WriteLine("Dia " + i + " simulado...");
             }
 
-            Console.WriteLine("Arquivo gerado!");
+            return cAnomalias;
         }
 
         private static double GetRandomDouble(double minimum, double maximum)
@@ -595,34 +593,26 @@ namespace GeraRotina
             return result;
         }
 
-        private static void WriteLine(ISheet worksheet, List<string> sb, int row, Rotina rotina, int algoritmo)
+        private static void WriteLine(List<string> sb, Rotina rotina, int algoritmo)
         {
-            var r = worksheet.CreateRow(row);
             var sLine = new List<string>();
 
             switch (algoritmo)
             {
                 case 1: // DBSCAN
                 case 2: // LOF
-                    r = worksheet.CreateRow(row);
                     var tm = rotina.DiaMes.Add(rotina.Hora);
-                    r.CreateCell(0).SetCellValue($"{tm.Hour}.{(tm.Minute / 60.0 * 100):00}");
                     sLine.Add($"{tm.Hour}.{(tm.Minute / 60.0 * 100):00}");
 
-                    r.CreateCell(1).SetCellValue(getDiaSemana(rotina.DiaMes.DayOfWeek) * 1000 + int.Parse(mapComodo[rotina.Comodo]));
                     sLine.Add((getDiaSemana(rotina.DiaMes.DayOfWeek) * 1000 + int.Parse(mapComodo[rotina.Comodo])).ToString());
                     break;
 
                 //case 3: // OPTICS
 
                 default:
-                    r.CreateCell(0).SetCellValue(rotina.DiaMes.ToShortDateString());
                     sLine.Add(rotina.DiaMes.ToShortDateString());
-                    r.CreateCell(1).SetCellValue(rotina.DiaMes.Add(rotina.Hora).ToShortTimeString());
                     sLine.Add(rotina.DiaMes.Add(rotina.Hora).ToShortTimeString());
-                    r.CreateCell(2).SetCellValue(rotina.Comodo);
                     sLine.Add(rotina.Comodo);
-                    r.CreateCell(3).SetCellValue(rotina.isDiaUtil ? "Sim" : "Não");
                     sLine.Add(rotina.isDiaUtil ? "Sim" : "Não");
                     break;
             }
