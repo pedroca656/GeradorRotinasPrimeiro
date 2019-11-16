@@ -99,7 +99,7 @@ namespace GeraRotina
 
             //Rotina1(dias, countAnomalias, rndMin, rndMax, sb, algoritmo);
             var anomaliasGeradas = Rotina2(dias, percAnomalias, rndMin, rndMax, sb, algoritmo);
-            
+
             var dir = Path.Combine(AppContext.BaseDirectory, "output");
             Directory.CreateDirectory(dir);
 
@@ -118,6 +118,12 @@ namespace GeraRotina
                     algoritmoNome = "";
                     break;
             }
+
+            if (System.Environment.MachineName.Contains("RODRIGO"))
+            {
+                dir = Path.Combine(@"C:\Users\rodri\Google Drive\Datasets-beta");
+            }
+
 
             var fileName = Path.Combine(dir, args[1] + algoritmoNome + $"__{anomaliasGeradas}__" + ".csv");
             using (var fs = new StreamWriter(fileName))
@@ -306,27 +312,31 @@ namespace GeraRotina
                 var iDia = random.Next(0, dias);
                 var dtAnomalia = dataBase.AddDays(iDia);
                 var diaSemana = getDiaSemana(dtAnomalia.DayOfWeek);
-                //var x = rotinas.Where(r => r.DiaMes == dtAnomalia).OrderBy(r=> r.Hora).ToList();
-                var iAnomaliasDia = 0;
-                //for (int ix = 1; ix < x.Count(); ix++)
+                if (diaSemana != 1 && diaSemana != 7)
                 {
                     if (random.NextDouble() > 0.9)
                     {
-                        //var hrAnomalia = x[ix - 1].Hora + TimeSpan.FromSeconds((x[ix].Hora - x[ix - 1].Hora).TotalSeconds / 2);
-                        //var hr = getTimeSpan(x[ix - 1].Hora, hrAnomalia, rndMin, rndMax, x[ix].Hora);
-
-                        //var comodosPossiveis = mapComodo.Keys.Except(new[] { x[ix - 1].Comodo, x[ix].Comodo }).ToList();
-                        //var c = comodosPossiveis[random.Next(0, comodosPossiveis.Count - 1)];
-                        //rotinas.Add(new Rotina(dtAnomalia, hr, "B", diaSemana != 1 && diaSemana != 7));
-
                         // ir ao banheiro de madrugada
-                        var hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(4,30,0), rndMin, rndMax);
+                        var hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(4, 30, 0), rndMin, rndMax);
                         rotinas.Add(new Rotina(dtAnomalia, hr, "B", diaSemana != 1 && diaSemana != 7));
 
                         iAnomalias++;
-                        //iAnomaliasDia++;
 
-                        //if (iAnomaliasDia > 2) break;
+                        // ir ao banheiro no meio da tarde
+                        hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(12, 30, 0), rndMin, rndMax);
+                        rotinas.Add(new Rotina(dtAnomalia, hr, "B", diaSemana != 1 && diaSemana != 7));
+
+                        iAnomalias++;
+
+                        // chegar mais cedo em casa e ir ao banheiro
+                        hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(15, 00, 0), rndMin, rndMax);
+                        rotinas.Add(new Rotina(dtAnomalia, hr, "S", diaSemana != 1 && diaSemana != 7));
+                        hr = getTimeSpan(hr, new TimeSpan(15, 30, 0), rndMin, rndMax);
+                        rotinas.Add(new Rotina(dtAnomalia, hr, "B", diaSemana != 1 && diaSemana != 7));
+                        hr = getTimeSpan(hr, new TimeSpan(15, 35, 0), rndMin, rndMax);
+                        rotinas.Add(new Rotina(dtAnomalia, hr, "S", diaSemana != 1 && diaSemana != 7));
+
+                        iAnomalias++;
                     }
                 }
 
