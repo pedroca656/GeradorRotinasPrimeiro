@@ -319,25 +319,34 @@ namespace GeraRotina
                         // ir ao banheiro de madrugada
                         var hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(4, 30, 0), rndMin, rndMax);
                         rotinas.Add(new Rotina(dtAnomalia, hr, "B", diaSemana != 1 && diaSemana != 7));
-
                         iAnomalias++;
-
-                        // ir ao banheiro no meio da tarde
-                        hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(12, 30, 0), rndMin, rndMax);
+                    }
+                    else if (random.NextDouble() > 0.9)
+                    {
+                        // ir ao banheiro ao meio-dia
+                        var hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(12, 30, 0), rndMin, rndMax);
                         rotinas.Add(new Rotina(dtAnomalia, hr, "B", diaSemana != 1 && diaSemana != 7));
-
                         iAnomalias++;
-
+                    }
+                    else if (random.NextDouble() > 0.9)
+                    {
                         // chegar mais cedo em casa e ir ao banheiro
-                        hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(15, 00, 0), rndMin, rndMax);
+                        var hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(15, 00, 0), rndMin, rndMax);
                         rotinas.Add(new Rotina(dtAnomalia, hr, "S", diaSemana != 1 && diaSemana != 7));
                         hr = getTimeSpan(hr, new TimeSpan(15, 30, 0), rndMin, rndMax);
                         rotinas.Add(new Rotina(dtAnomalia, hr, "B", diaSemana != 1 && diaSemana != 7));
                         hr = getTimeSpan(hr, new TimeSpan(15, 35, 0), rndMin, rndMax);
                         rotinas.Add(new Rotina(dtAnomalia, hr, "S", diaSemana != 1 && diaSemana != 7));
-
                         iAnomalias++;
                     }
+                    else if (random.NextDouble() > 0.9)
+                    {
+                        // ir para fora de madrugada
+                        var hr = getTimeSpan(TimeSpan.Zero, new TimeSpan(3, 0, 0), rndMin, rndMax);
+                        rotinas.Add(new Rotina(dtAnomalia, hr, "F", diaSemana != 1 && diaSemana != 7));
+                        iAnomalias++;
+                    }
+
                 }
 
             }
