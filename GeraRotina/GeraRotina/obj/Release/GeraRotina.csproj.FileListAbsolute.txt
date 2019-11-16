@@ -1,0 +1,6 @@
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Release\GeraRotina.exe.config
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Release\GeraRotina.exe
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Release\GeraRotina.pdb
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Release\GeraRotina.csprojAssemblyReference.cache
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Release\GeraRotina.exe
+C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Release\GeraRotina.pdb

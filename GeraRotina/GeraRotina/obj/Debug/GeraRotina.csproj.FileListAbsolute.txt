@@ -59,6 +59,5 @@ C:\GitProjects\GeradorRotinas\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csproj.
 C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.exe.config
 C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.exe
 C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\bin\Debug\GeraRotina.pdb
-C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.csprojAssemblyReference.cache
 C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.exe
 C:\Users\rodri\OneDrive - PUCRS - BR\Pucrs\TC\GeradorRotinasPrimeiro\GeraRotina\GeraRotina\obj\Debug\GeraRotina.pdb
