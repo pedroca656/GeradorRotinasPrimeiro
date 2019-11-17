@@ -2,7 +2,7 @@
 
 Programa gerador de simulação de rotinas para validação de algoritmos de detecção de anomalias.
 
-instruções de uso:
+Para executar o programa, utilizar a seguinte linha de comando em ambiente Windows:
 
         GeraRotina.exe numDias NomeArquivo numAlgoritmo [percAnomalias]
           numDia:       quantidade de dias a serem simulados.
@@ -11,4 +11,5 @@ instruções de uso:
           umAlgoritmo:  id do algoritmo a ser utilizado para pré-processamento dos dados (1 = DBSCAN; 2 = LOF; 
                         3 = OPTICS).
           percAnomlais: porcentagem de anomalias a serem geradas.(opcional)
-        
+          
+        exemplo: GeraRotina.exe 365 Dataset_01 1 5
